@@ -1,6 +1,6 @@
 # EventCameraCalibration
 
-Intrinsic + stereo calibration for event cameras, using a [blinking LED board](LED_checkerboard_doc/LED_Box__Notes_Ver1_28Feb26 2.pdf)
+Intrinsic + stereo calibration for event cameras, using a [blinking LED board](LED_checkerboard_doc/LED_Box__Notes_Ver1_28Feb26%202.pdf)
 as the calibration target. Tracks the board with AEMOT, decodes each LED's
 beacon ID, fits per-camera intrinsics and stereo extrinsics, and evaluates
 the result against a set of accuracy and process-evidence gates before

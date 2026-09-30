@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # EventCameraCalibration
 
 Intrinsic + stereo calibration for event cameras, using a blinking LED board
@@ -69,9 +68,9 @@ pip install numpy h5py faery
 
 The evaluation suite (`evaluation/calibration_quality.py` and friends) has
 its own, separate setup - see [`evaluation/README.md`](evaluation/README.md)
-(Python 3.10+, headless OpenCV; that doc references a `requirements.txt`
-that doesn't currently exist in this repo - see
-[Known limitations](#known-limitations)). Don't mix the two virtual
+(Python 3.10+, headless OpenCV). Its dependencies are listed in
+[`evaluation/requirements.txt`](evaluation/requirements.txt); use a separate
+environment for it, as described there. Don't mix the two virtual
 environments, and don't distribute either `.venv` - both are gitignored.
 
 ### Known build gotcha
@@ -156,13 +155,11 @@ track_logs/                    All generated output lands here (gitignored)
 ## Quick start
 
 1. Record your calibration data (see [Data collection](#data-collection)).
-2. Edit `calibration_config.sh` with your own paths (it's gitignored - your
-   machine-specific config never gets committed). If you're setting this up
-   fresh and don't have one yet, see the note in
-   [Known limitations](#known-limitations) - there's currently no tracked
-   template to copy from; base a new one on this README's
-   [Configuration reference](#configuration-reference) or an existing
-   teammate's config.
+2. Create your local config from the tracked template, then edit its paths:
+  ```bash
+  cp calibration_config.example.sh calibration_config.sh
+  ```
+  `calibration_config.sh` is gitignored so machine-specific paths stay local.
 3. At minimum, set:
    - `number_camera`, `camera_names`, `event_filepaths`, `intrinsic_event_filepaths`
    - `led_columns`, `led_rows`, `led_spacing_x`, `led_spacing_y` (measure the
@@ -197,15 +194,21 @@ above):
 
 1. **AEMOT tracker** (`AEMOT-realtime/build/aemot_replay`) tracks the LED
    board's blinking points across the recording, producing a `.bees` file
-   (validated track states) and per-track `.aemotevt` events.
-2. **`aemotevt_to_es_faery.py`** splits the combined event stream into one
-   `.es` file per track ID.
+  (validated track states) and a combined `.aemotevt` event stream. The
+  `.bees` file contains validated tracks; `.aemotevt` can also contain
+  candidate tracks that have no corresponding state estimates.
+2. **`track_logs/aemotevt_to_es_faery.py`** splits the combined event stream
+  into one `.es` file per track ID in `track_logs/temp/`.
 3. **event_decoder** (`event_decoder/build/decoder_replay`) reads each
-   track's blink pattern and decodes it into a beacon ID + counter.
+  track's blink pattern and writes decoded rows containing the event
+  timestamp, beacon ID, and lower and upper counter bytes. A correctly
+  decoded track should keep a stable beacon ID and have an incrementing
+  combined counter; gaps can indicate dropped messages.
 4. **`utils/filter_decoded_files.py`** matches decoded beacon IDs back to
-   tracker states (a beacon can get a new track ID if it leaves and
-   re-enters the frame) and writes one `.h5` file per camera, keyed by
-   beacon ID rather than track ID.
+  tracker states. A beacon can get a new track ID if it leaves and
+  re-enters the frame, so the output is grouped by decoded beacon ID rather
+  than track ID. Each camera's `.h5` file contains `State` and `Decoded`
+  data for each beacon.
 
 This is the most compute-heavy stage - it processes the entire raw
 recording, regardless of what happens downstream, and now does so twice per
@@ -488,17 +491,3 @@ numbers are the problem, look at the M1-M6 table instead.
 - `--max-recording-start-gap-s`'s default (300s) is not currently exposed
   in `calibration_config.sh` - if your setup has an unavoidable, verified
   benign gap larger than that, it needs a CLI override today.
-- `run_calibration.sh` references `calibration_config.example.sh` (in a
-  shellcheck directive) as the template new configs should be copied from,
-  but that file doesn't currently exist in this repo - only individual
-  teammates' own gitignored `calibration_config.sh` files do. Worth adding
-  a real, tracked example file so `cp calibration_config.example.sh
-  calibration_config.sh` actually works for a new setup.
-- `evaluation/README.md` documents installing from `evaluation/requirements.txt`,
-  but that file doesn't currently exist either - the evaluation suite's
-  actual dependencies (NumPy, OpenCV headless, etc.) need to be installed
-  manually until it's added.
-=======
-# EventCal-MoCap
-Code associated with "EventCal-MoCap: A Reproducible End-to-End Calibration and Quality-Assessment Framework for Event-Camera Motion Capture"
->>>>>>> 42b7066b1679aca451b3e51949d4b1367c16086c

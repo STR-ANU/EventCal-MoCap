@@ -16,11 +16,11 @@
 #   number_camera=3
 #   camera_names=("camera_1" "camera_2" "camera_3")
 #   event_filepaths=("/abs/path/cam1.es" "/abs/path/cam2.es" "/abs/path/cam3.es")
-number_camera=2
+number_camera=1
 
 camera_names=(
     "camera_1"
-    "camera_2"
+    # "camera_2"
 )
 
 # INTRINSICS recording: one per camera, collected SEPARATELY and
@@ -33,9 +33,11 @@ intrinsic_event_filepaths=(
     # "/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_1/2026-09-09T22-47-50Z_10000000_30000000.es"
     # "/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_2/2026-09-09T22-51-49Z_10000000_30000000.es"
 
-    "/home/vutran/event_camera/camera_calibration/Data/280926-CalibrationData/left_camera/280926-led/intrinsics-left-camera/2026-09-28T05-43-06Z.es"
-    "/home/vutran/event_camera/camera_calibration/Data/280926-CalibrationData/right_camera/280926-led/intrinsics-right-camera/2026-09-28T05-40-13Z.es"
+    # "/home/vutran/event_camera/camera_calibration/Data/280926-CalibrationData/left_camera/280926-led/intrinsics-left-camera/2026-09-28T05-43-06Z.es"
+    # "/home/vutran/event_camera/camera_calibration/Data/280926-CalibrationData/right_camera/280926-led/intrinsics-right-camera/2026-09-28T05-40-13Z.es"
+    "/home/vutran/event_camera/camera_calibration/Data/300926-CalibData/2026-09-30T06-42-23Z.es"
 )
+
 
 # STEREO recording: the board waved so it's visible to BOTH cameras
 # simultaneously throughout the whole clip - this is what
@@ -45,7 +47,7 @@ intrinsic_event_filepaths=(
 # an intrinsics-only recording here.
 event_filepaths=(
     "/home/vutran/event_camera/camera_calibration/Data/280926-CalibrationData/left_camera/280926-led/extrinsics-left-camera/2026-09-28T05-44-34Z.es"
-    "/home/vutran/event_camera/camera_calibration/Data/280926-CalibrationData/right_camera/280926-led/extrinsics-right-camera/2026-09-28T05-43-06Z.es"
+    # "/home/vutran/event_camera/camera_calibration/Data/280926-CalibrationData/right_camera/280926-led/extrinsics-right-camera/2026-09-28T05-44-30Z.es"
 )
 
 
@@ -55,7 +57,7 @@ event_filepaths=(
 # Stereo calibration runs after ALL cameras above have completed tracking,
 # decoding, and intrinsic calibration - this works the same whether you have
 # 2 cameras or 20.
-run_stereo_calibration=true
+run_stereo_calibration=false #true
 
 # Which camera pairs to stereo-calibrate. Two modes:
 #   "all_pairs" - every unique combination of the cameras listed above
@@ -106,7 +108,7 @@ stereo_random_seed=0
 # occlusion (e.g. from tilting the board to cover more of the FOV), and was
 # the actual cause of "No synchronized views survived" - not --hz or
 # --max-gap, despite that error message's old wording.
-stereo_min_points=12
+stereo_min_points=1
 
 # Optional: reject a candidate stereo view if any beacon's local
 # interpolation speed (pixels between the two bracketing tracker samples,
@@ -201,7 +203,7 @@ evaluation_repeatability_runs=1
 # your world/global coordinate system (origin at LED 0, +X/+Y along the grid,
 # +Z the board normal - see stereo/global_frame_calibrate.py). Requires
 # run_stereo_calibration=true.
-run_global_frame_calibration=true
+run_global_frame_calibration=false #true
 
 # Which already-calibrated stereo pair to anchor the global frame to. Must be
 # one of the pairs resolved above (from stereo_pairs, or from all_pairs).

@@ -1,0 +1,20 @@
+# Dependencies for the evaluation suite (evaluation/calibration_quality.py
+# and friends) and the stereo/intrinsic fitting scripts it imports from.
+# This is a SEPARATE environment from the top-level pipeline's own
+# dependencies (faery, h5py - see the main README) - do not mix the two
+# virtual environments, and do not install both opencv-python and
+# opencv-python-headless in the same one.
+#
+# Usage:
+#   python3 -m venv .venv-evaluation
+#   source .venv-evaluation/bin/activate
+#   python3 -m pip install -r evaluation/requirements.txt
+
+numpy>=1.24
+h5py>=3.8
+
+# Headless build: no display/Qt required, matches this suite's actual usage
+# (no GUI window is ever opened). If your environment already has the
+# regular opencv-python installed for something else, use that instead -
+# don't install both in the same environment.
+opencv-python-headless>=4.8

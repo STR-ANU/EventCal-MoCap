@@ -1,0 +1,40 @@
+{
+    "recordings": "recordings",
+    "serial": null,
+    "fifo_size": 4096,
+    "drop_threshold": 256,
+    "evk4": {
+        "biases": {
+            "pr": 124,
+            "fo": 83,
+            "hpf": 0,
+            "diff_on": 102,
+            "diff": 77,
+            "diff_off": 73,
+            "inv": 91,
+            "refr": 20,
+            "reqpuy": 140,
+            "reqpux": 124,
+            "sendreqpdy": 148,
+            "unknown_1": 116,
+            "unknown_2": 81
+        },
+        "x_mask": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "y_mask": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "mask_intersection_only": false
+    },
+    "psee413": {
+        "biases": {
+            "pr": 105,
+            "fo_p": 74,
+            "fo_n": 0,
+            "hpf": 0,
+            "diff_on": 115,
+            "diff": 80,
+            "diff_off": 52,
+            "refr": 68,
+            "reqpuy": 148,
+            "blk": 120
+        }
+    }
+}

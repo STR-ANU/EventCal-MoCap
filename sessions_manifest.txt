@@ -1,0 +1,32 @@
+# sessions_manifest.txt
+#
+# UPDATED FORMAT (breaking change): fields are now grouped by purpose, not
+# by camera - all intrinsics paths first, then all stereo paths, then
+# (since this base config has run_global_frame_calibration=true) the
+# global-frame paths - matching calibration_config.sh's own
+# intrinsic_event_filepaths / event_filepaths split:
+#   intrinsic_event_filepath_cam1,intrinsic_event_filepath_cam2,event_filepath_cam1,event_filepath_cam2,global_frame_cam1_path,global_frame_cam2_path
+#
+# Session 1's line below was read directly out of your actual
+# calibration_config.sh - it is real. Sessions 2 and 3 are placeholders:
+# those recordings don't exist yet, so there is nothing real to put there.
+# Record two more sessions (ideally unmounting/remounting the rig between
+# each - and remember each session now needs its own INTRINSICS recording
+# too, not just a stereo one), then replace the REPLACE_ME_* segments below
+# with those files' real paths.
+#
+# Do NOT duplicate session 1's line for sessions 2/3 - reusing the same
+# recording as its own "second" and "third" session will always look
+# perfectly repeatable, which defeats the entire point of this check.
+#
+# Run:
+#   ./run_repeatability_pipeline.sh calibration_config.sh sessions_manifest.txt ./repeatability_configs
+
+# --- Session 1 (real - from your current calibration_config.sh) ---
+/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_1/2026-09-09T22-47-50Z_10000000_30000000.es,/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_2/2026-09-09T22-51-49Z_10000000_30000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_1/2026-09-09T22-53-41Z_10000000_20000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_2/2026-09-09T22-53-38Z_10000000_20000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_1/camera1_global_reference.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_2/camera2_global_reference.es
+
+# --- Session 2 (placeholder - record, then replace) ---
+/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_1/2026-09-09T22-47-50Z_10000000_30000000.es,/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_2/2026-09-09T22-51-49Z_10000000_30000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_1/2026-09-09T22-53-41Z_10000000_20000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_2/2026-09-09T22-53-38Z_10000000_20000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_1/camera1_global_reference.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_2/camera2_global_reference.es
+
+# --- Session 3 (placeholder - record, then replace) ---
+/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_1/2026-09-09T22-47-50Z_10000000_30000000.es,/home/vutran/event_camera/camera_calibration/Data/intrinsics/camera_2/2026-09-09T22-51-49Z_10000000_30000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_1/2026-09-09T22-53-41Z_10000000_20000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_2/2026-09-09T22-53-38Z_10000000_20000000.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_1/camera1_global_reference.es,/home/vutran/event_camera/camera_calibration/Data/stereo/camera_2/camera2_global_reference.es

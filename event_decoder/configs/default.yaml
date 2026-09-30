@@ -1,0 +1,7 @@
+## -------------------------- ##
+## Decoding config file ##
+## -------------------------- ##
+f_fixed_coordinates : false
+led_px              : 708
+led_py              : 424
+led_r               : 7
